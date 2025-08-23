@@ -1,6 +1,6 @@
 ﻿namespace EventAggregator.WebApi.Application.DTOs.Responses;
 
-public class StartEventAggregationResponse
+public record StartShowAggregationResponse
 {
     public Guid RequestId { get; set; }
 }

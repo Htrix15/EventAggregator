@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EventAggregator.Shared.Infrastructure\EventAggregator.Shared.Infrastructure.csproj" />
     <ProjectReference Include="..\EventAggregator.WebApi.Application\EventAggregator.WebApi.Application.csproj" />
   </ItemGroup>
 
