@@ -1,4 +1,4 @@
-﻿namespace EventAggregator.Shared.ValueObjects;
+﻿namespace EventAggregator.Shared.ShowEntities.ValueObjects;
 
 public readonly record struct DateRange
 {
