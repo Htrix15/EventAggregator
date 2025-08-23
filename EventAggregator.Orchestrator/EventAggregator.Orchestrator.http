@@ -1,0 +1,6 @@
+@EventAggregator.Orchestrator_HostAddress = http://localhost:5086
+
+GET {{EventAggregator.Orchestrator_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
