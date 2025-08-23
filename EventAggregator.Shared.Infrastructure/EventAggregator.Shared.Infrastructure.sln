@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36408.4 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventAggregator.Shared.Infrastructure", "EventAggregator.Shared.Infrastructure.csproj", "{F615B9FB-B649-4214-A651-984EDF6E4EBA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F615B9FB-B649-4214-A651-984EDF6E4EBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F615B9FB-B649-4214-A651-984EDF6E4EBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F615B9FB-B649-4214-A651-984EDF6E4EBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F615B9FB-B649-4214-A651-984EDF6E4EBA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {075D9210-9A90-44CC-A195-DEB665B854F9}
+	EndGlobalSection
+EndGlobal
