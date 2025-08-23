@@ -1,6 +1,6 @@
 ﻿namespace EventAggregator.Shared.ValueObjects;
 
-public readonly struct DateRange
+public readonly record struct DateRange
 {
     public DateOnly Start { get; }
     public DateOnly End { get; }
