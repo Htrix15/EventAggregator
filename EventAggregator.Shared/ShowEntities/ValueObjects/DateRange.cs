@@ -2,8 +2,8 @@
 
 public readonly record struct DateRange
 {
-    public DateOnly Start { get; }
-    public DateOnly End { get; }
+    public DateOnly Start { get; init; }
+    public DateOnly End { get; init; }
 
     public DateRange(DateOnly start, DateOnly end)
     {
