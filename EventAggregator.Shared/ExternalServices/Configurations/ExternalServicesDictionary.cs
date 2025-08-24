@@ -6,20 +6,20 @@ namespace EventAggregator.Shared.ExternalServices.Configurations;
 
 public static class ExternalServicesDictionary
 {
-    private readonly static Dictionary<string, Dictionary<ExternalServiceType, ExternalServiceDefinition>> ExternalServices = new()
+    private readonly static Dictionary<string, Dictionary<ExternalServiceType, ExternalServiceDefinition>> _externalServices = new()
     {
         [Environments.Development] = new Dictionary<ExternalServiceType, ExternalServiceDefinition>
             {
                 [ExternalServiceType.Orchestrator] = new ExternalServiceDefinition
                 {
                     BaseUri = "https://localhost:44330/"
-                },
-            },
+                }
+        },
     };
 
     public static ExternalServiceDefinition GetExternalServiceDefinition(string environment, ExternalServiceType serviceType)
     {
-        if (ExternalServices.TryGetValue(environment, out var definitions))
+        if (_externalServices.TryGetValue(environment, out var definitions))
         {
             if (definitions.TryGetValue(serviceType, out var definition)){
                 return definition;
