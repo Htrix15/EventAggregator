@@ -2,7 +2,7 @@
 using EventAggregator.Shared.MessageBrokers.Abstractions;
 using System.Text.Json;
 
-namespace EventAggregator.Shared.Infrastructure.Kafka;
+namespace EventAggregator.Shared.Infrastructure.Kafka.Producer;
 
 internal class KafkaJsonSerializer<TMessage> : ISerializer<TMessage> where TMessage : IMessage
 {

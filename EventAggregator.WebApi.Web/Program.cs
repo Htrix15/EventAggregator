@@ -11,6 +11,7 @@ builder.Services.AddApiConfiguration();
 
 builder.Services.AddSharedExternalServiceInfrastructure();
 builder.Services.AddSharedKafkaProducerInfrastructure<StartShowAggregationMessage>(
+    builder.Configuration.GetSection("MessageBrokers:ShowAggregation"), 
     builder.Configuration.GetSection("MessageBrokers:ShowAggregation"));
 builder.Services.AddApplication();
 builder.Services.AddExternalServiceHttpClient(ExternalServiceType.Orchestrator);
