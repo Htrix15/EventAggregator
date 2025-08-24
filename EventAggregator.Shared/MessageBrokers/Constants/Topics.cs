@@ -2,16 +2,16 @@
 
 namespace EventAggregator.Shared.MessageBrokers.Constants;
 
-public class TopicsDictionary
+public class Topics
 {
-    private readonly static Dictionary<TopicType, string> _topicsLibrary = new()
+    private readonly static Dictionary<TopicType, string> _topics = new()
     {
         [TopicType.StartShowAggregation] = "start-show-aggregation"
     };
 
     public static string GetTopic(TopicType topic)
     {
-        if (_topicsLibrary.TryGetValue(topic, out var topicStr))
+        if (_topics.TryGetValue(topic, out var topicStr))
         {
             return topicStr;
         }
