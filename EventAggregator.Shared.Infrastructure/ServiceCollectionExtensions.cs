@@ -1,5 +1,5 @@
 ﻿using EventAggregator.Shared.ExternalServices.Services;
-using EventAggregator.Shared.Infrastructure.Kafka;
+using EventAggregator.Shared.Infrastructure.Kafka.Producer;
 using EventAggregator.Shared.Infrastructure.Services;
 using EventAggregator.Shared.MessageBrokers.Abstractions;
 using EventAggregator.Shared.MessageBrokers.Configuration;
@@ -17,9 +17,11 @@ public static class ServiceCollectionExtensions
     }
 
     public static IServiceCollection AddSharedKafkaProducerInfrastructure<TMessage>(this IServiceCollection services, 
-        IConfigurationSection configurationSection) where TMessage: IMessage
+        IConfigurationSection messageBrokerConfigurationSection,
+        IConfigurationSection messageBrokerProducerConfigurationSection) where TMessage: IMessage
     {
-        services.Configure<MessageBrokerConfiguration>(configurationSection);
+        services.Configure<MessageBrokerConfiguration>(messageBrokerConfigurationSection);
+        services.Configure<MessageBrokerProducerConfiguration>(messageBrokerProducerConfigurationSection);
         services.AddSingleton<MessageBrokersDefaultConfigurations>();
         services.AddSingleton<IProducer<TMessage>, KafkaProducer<TMessage>>();
         return services;
