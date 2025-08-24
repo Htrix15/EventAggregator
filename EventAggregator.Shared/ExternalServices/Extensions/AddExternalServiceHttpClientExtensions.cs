@@ -17,7 +17,7 @@ public static class AddExternalServiceHttpClientExtensions
 
             var environmentName = EnvironmentMapping.Map(environment.EnvironmentName);
 
-            client.BaseAddress = new Uri(ExternalServicesDictionary.GetExternalServiceDefinition(environmentName, externalServiceType).BaseUri);
+            client.BaseAddress = new Uri(ExternalServicesConfigurations.GetExternalServiceDefinition(environmentName, externalServiceType).BaseUri);
         });
 
         return services;

@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace EventAggregator.Shared.ExternalServices.Configurations;
 
-public static class ExternalServicesDictionary
+public static class ExternalServicesConfigurations
 {
     private readonly static Dictionary<string, Dictionary<ExternalServiceType, ExternalServiceDefinition>> _externalServices = new()
     {
