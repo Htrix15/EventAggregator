@@ -4,5 +4,6 @@ namespace EventAggregator.Shared.MessageBrokers.Configuration;
 
 public record MessageBrokerConsumerConfiguration
 {
-    public required TopicType[] ListeningTopics { get; init; }
+    public required TopicType WorkCommandsTopic { get; init; }
+    public TopicType? ControlCommandsTopic { get; init; }
 }
