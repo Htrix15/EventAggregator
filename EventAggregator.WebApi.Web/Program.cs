@@ -1,6 +1,7 @@
 using EventAggregator.Shared.ExternalServices.Enums;
 using EventAggregator.Shared.ExternalServices.Extensions;
 using EventAggregator.Shared.Infrastructure;
+using EventAggregator.Shared.ShowEntities.Messages;
 using EventAggregator.WebApi.Application;
 using EventAggregator.WebApi.Web.Configuration;
 
@@ -8,7 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApiConfiguration();
 
-builder.Services.AddSharedInfrastructure();
+builder.Services.AddSharedExternalServiceInfrastructure();
+builder.Services.AddSharedKafkaProducerInfrastructure<StartShowAggregationMessage>(
+    builder.Configuration.GetSection("MessageBrokers:ShowAggregation"));
 builder.Services.AddApplication();
 builder.Services.AddExternalServiceHttpClient(ExternalServiceType.Orchestrator);
 
