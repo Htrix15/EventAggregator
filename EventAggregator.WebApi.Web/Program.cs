@@ -14,11 +14,9 @@ builder.Services.AddApiConfiguration();
 
 builder.Services.AddSharedExternalServiceInfrastructure();
 
-builder.Services.AddSingleton<MessageBrokersDefaultConfigurations>();
 builder.Services.AddKafkaProducerServices<StartShowAggregationMessage, KafkaProducer<StartShowAggregationMessage>>(
     builder.Configuration.GetSection("MessageBroker"),
-    TopicType.StartShowAggregation,
-    overlayMessageBrokerConfiguration: true);
+    TopicType.StartShowAggregation);
 
 builder.Services.AddApplication();
 builder.Services.AddExternalServiceHttpClient(ExternalServiceType.Orchestrator);

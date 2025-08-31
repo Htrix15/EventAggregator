@@ -7,5 +7,5 @@ public record MessageBrokerConfiguration
 {
     public ExternalServiceType Client { get; set; }
     public GroupType Group { get; set; }
-    public string? BootstrapServers { get; init; }
+    public required string BootstrapServers { get; init; }
 }

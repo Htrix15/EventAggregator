@@ -1,6 +1,5 @@
 ﻿using Confluent.Kafka;
 using EventAggregator.Shared.Infrastructure.Kafka.Mapping;
-using EventAggregator.Shared.Infrastructure.Kafka.OverlayConfigurations;
 using EventAggregator.Shared.MessageBrokers.Configuration;
 using EventAggregator.Shared.MessageBrokers.Constants;
 using EventAggregator.Shared.MessageBrokers.Enums;
@@ -9,7 +8,6 @@ using KafkaFlow.Serializer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using System.Threading.Channels;
 
 namespace EventAggregator.Shared.Infrastructure.Kafka.Consumer;
@@ -20,35 +18,20 @@ public static class KafkaConsumerExtensions
         IConfigurationSection messageBrokerConfigurationSection,
         IConfigurationSection messageBrokerConsumerConfigurationSection,
         GroupType groupType,
-        TopicType topicType,
-        bool overlayMessageBrokerConfiguration,
-        bool overlayConsumerConfiguration) where TMessageHandler : class, IMessageHandler<TMessage>
+        TopicType topicType) where TMessageHandler : class, IMessageHandler<TMessage>
     {
 
-        var serviceProvider = services.BuildServiceProvider();
-        var defaultConfigs = serviceProvider
-            .GetRequiredService<MessageBrokersDefaultConfigurations>();
-          
         services.Configure<MessageBrokerConfiguration>(messageBrokerConfigurationSection);
         services.Configure<MessageBrokerMessageToChannelConsumerConfiguration>(messageBrokerConsumerConfigurationSection);
 
-        var brokerConfig = serviceProvider.GetRequiredService<IOptions<MessageBrokerConfiguration>>().Value;
-        var consumerConfig = serviceProvider.GetRequiredService<IOptions<MessageBrokerMessageToChannelConsumerConfiguration>>().Value;
+        var brokerConfig = messageBrokerConfigurationSection.Get<MessageBrokerConfiguration>()
+          ?? throw new InvalidOperationException("MessageBroker configuration is missing.");
 
-        if (overlayMessageBrokerConfiguration)
-        {
-            var defaultMessageBrokerConfigs = defaultConfigs.GetMessageBrokerConfiguration();
-            brokerConfig = KafkaOverlayBrokerConfiguration.Overlay(brokerConfig, defaultMessageBrokerConfigs);
-        }
-
-        if (overlayConsumerConfiguration)
-        {
-            var defaultMessageToChannelConsumerConfig = defaultConfigs.GetMessageBrokerMessageToChannelConsumerConfiguration();
-            consumerConfig = KafkaOverlayConsumerMessageToChannelSettings.Overlay(consumerConfig, defaultMessageToChannelConsumerConfig);
-        }
+        var consumerConfig = messageBrokerConsumerConfigurationSection.Get<MessageBrokerMessageToChannelConsumerConfiguration>()
+          ?? throw new InvalidOperationException("MessageBrokerMessageToChannelConsumer configuration is missing.");
 
         services.AddSingleton(provider =>
-            consumerConfig.UnboundedChannel!.Value
+            consumerConfig.UnboundedChannel
                 ? Channel.CreateUnbounded<TMessage>()
                 : Channel.CreateBounded<TMessage>(new BoundedChannelOptions(consumerConfig.ChannelCapacity!.Value)
                     {
@@ -71,7 +54,7 @@ public static class KafkaConsumerExtensions
                             SessionTimeoutMs = consumerConfig.SessionTimeoutMs,
                             MaxPollIntervalMs = consumerConfig.MaxPollIntervalMs,
                             HeartbeatIntervalMs = consumerConfig.HeartbeatIntervalMs,
-                            AutoOffsetReset = AutoOffsetResetMapping.Map(consumerConfig.AutoOffsetReset!.Value),
+                            AutoOffsetReset = AutoOffsetResetMapping.Map(consumerConfig.AutoOffsetReset),
                             EnableAutoCommit = consumerConfig.EnableAutoCommit,
                             EnableAutoOffsetStore = consumerConfig.EnableAutoOffsetStore
                         })

@@ -11,5 +11,5 @@ public record MessageBrokerConsumerConfiguration
     public int? HeartbeatIntervalMs { get; init; }
     public bool? EnableAutoCommit { get; init; }
     public bool? EnableAutoOffsetStore { get; init; }
-    public AutoOffsetReset? AutoOffsetReset { get; init; }
+    public AutoOffsetReset AutoOffsetReset { get; init; }
 }
