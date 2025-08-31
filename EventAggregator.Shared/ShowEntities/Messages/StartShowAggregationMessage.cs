@@ -6,6 +6,6 @@ namespace EventAggregator.Shared.ShowEntities.Messages;
 
 public record StartShowAggregationMessage : MessageBase
 {
-    public required List<DateRange> SearchDateRanges { get; set; }
-    public required List<ShowType> ShowTypes { get; set; }
+    public required List<DateRange> SearchDateRanges { get; init; }
+    public required List<ShowType> ShowTypes { get; init; }
 }

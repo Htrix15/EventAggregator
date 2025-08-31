@@ -19,6 +19,11 @@ builder.Services.AddKafkaProducer<StartShowAggregationMessage>(
     builder.Configuration.GetSection("MessageBroker:Producers"),
     "StartShowAggregation");
 
+builder.Services.AddKafkaProducer<BreakShowAggregationMessage>(
+    builder.Configuration.GetSection("MessageBroker:Settings"),
+    builder.Configuration.GetSection("MessageBroker:Producers"),
+    "BreakShowAggregation");
+
 builder.Services.AddExternalServiceHttpClient(ExternalServiceType.Orchestrator);
 
 builder.Services.AddApplication();

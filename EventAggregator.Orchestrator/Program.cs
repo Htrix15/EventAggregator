@@ -9,6 +9,11 @@ builder.Services.AddKafkaConsumer<StartShowAggregationMessage>(
     builder.Configuration.GetSection("MessageBroker:Consumers"),
     "StartShowAggregation");
 
+builder.Services.AddKafkaConsumer<BreakShowAggregationMessage>(
+    builder.Configuration.GetSection("MessageBroker:Settings"),
+    builder.Configuration.GetSection("MessageBroker:Consumers"),
+    "BreakShowAggregation");
+
 builder.Services.AddHealthChecks();
 
 var app = builder.Build();
