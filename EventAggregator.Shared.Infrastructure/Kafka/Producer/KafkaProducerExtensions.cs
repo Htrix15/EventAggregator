@@ -1,43 +1,31 @@
 ﻿using EventAggregator.Shared.MessageBrokers.Abstractions;
 using EventAggregator.Shared.MessageBrokers.Configuration;
-using EventAggregator.Shared.MessageBrokers.Constants;
-using EventAggregator.Shared.MessageBrokers.Enums;
-using KafkaFlow;
-using KafkaFlow.Serializer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace EventAggregator.Shared.Infrastructure.Kafka.Producer;
 
 public static class KafkaProducerExtensions
 {
-
-    public static IServiceCollection AddKafkaProducerServices<TMessage, TProducer>(this IServiceCollection services,
-        IConfigurationSection messageBrokerConfigurationSection,
-        TopicType topicType)
-            where TMessage : IMessage 
-            where TProducer : IProducer<TMessage>
+    public static IServiceCollection AddKafkaProducer<TMessage>(this IServiceCollection services,
+       IConfigurationSection messageBrokerConfigurationSection,
+       IConfigurationSection messageBrokerProducerConfigurationSection,
+       string optionsKey) where TMessage : IMessage
     {
-        services.Configure<MessageBrokerConfiguration>(messageBrokerConfigurationSection);
+        services.Configure<MessageBrokerConfiguration>(optionsKey, messageBrokerConfigurationSection);
+        services.Configure<MessageBrokerProducerConfiguration>(optionsKey, messageBrokerProducerConfigurationSection.GetSection(optionsKey));
 
-        var brokerConfig = messageBrokerConfigurationSection.Get<MessageBrokerConfiguration>()
-            ?? throw new InvalidOperationException("MessageBroker configuration is missing.");
+        services.AddSingleton<IProducer<TMessage>>(sp =>
+        {
+            var messageBrokerConfigurationMonitor = sp.GetRequiredService<IOptionsMonitor<MessageBrokerConfiguration>>();
+            var producerConfigurationMonitor = sp.GetRequiredService<IOptionsMonitor<MessageBrokerProducerConfiguration>>();
 
-        services.AddKafka(
-            kafka => kafka
-                .UseConsoleLog()
-                .AddCluster(
-                    cluster => cluster
-                        .WithBrokers([brokerConfig.BootstrapServers])
-                        .CreateTopicIfNotExists(Topics.GetTopic(topicType))
-                        .AddProducer<TProducer>(
-                            producer => producer
-                                .AddMiddlewares(m => m.AddSerializer<JsonCoreSerializer>())
-                        )
-                )
-        );
+            var messageBrokerConfiguration = messageBrokerConfigurationMonitor.Get(optionsKey)!; 
+            var producerConfiguration = producerConfigurationMonitor.Get(optionsKey)!; 
 
-        services.AddSingleton<IProducer<TMessage>, KafkaProducer<TMessage>>();
+            return new KafkaProducer<TMessage>(messageBrokerConfiguration, producerConfiguration);
+        });
 
         return services;
     }

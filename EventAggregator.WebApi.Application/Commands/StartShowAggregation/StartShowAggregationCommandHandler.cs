@@ -16,7 +16,7 @@ public class StartShowAggregationCommandHandler(IExternalServiceHealthChecker ex
         var requestId = Guid.NewGuid();
 
         //TODO Use cache, refresh in background on timeout
-        var orchestratorHealthy = await externalServiceHealthChecker.IsServiceHealthy(ExternalServiceType.Orchestrator.ToString(), 
+        var orchestratorHealthy = await externalServiceHealthChecker.IsServiceHealthy(ExternalServiceType.Orchestrator.ToString(),
             cancellationToken);
 
         if (!orchestratorHealthy)
