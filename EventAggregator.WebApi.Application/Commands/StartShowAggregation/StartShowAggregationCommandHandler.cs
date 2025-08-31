@@ -38,7 +38,7 @@ public class StartShowAggregationCommandHandler(IExternalServiceHealthChecker ex
 
         try
         {
-            await producer.SendMessage(requestId, message, TopicType.StartShowAggregation, cancellationToken);
+            await producer.SendMessage(messageKey: requestId.ToString(), message, TopicType.StartShowAggregation, cancellationToken);
         }
         catch
         {
