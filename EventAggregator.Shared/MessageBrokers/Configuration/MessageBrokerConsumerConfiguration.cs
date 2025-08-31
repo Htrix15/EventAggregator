@@ -4,6 +4,12 @@ namespace EventAggregator.Shared.MessageBrokers.Configuration;
 
 public record MessageBrokerConsumerConfiguration
 {
-    public required TopicType WorkCommandsTopic { get; init; }
-    public TopicType? ControlCommandsTopic { get; init; }
+    public int? BufferSize { get; init; }
+    public int? WorkersCount { get; init; }
+    public int? SessionTimeoutMs { get; init; }
+    public int? MaxPollIntervalMs { get; init; }
+    public int? HeartbeatIntervalMs { get; init; }
+    public bool? EnableAutoCommit { get; init; }
+    public bool? EnableAutoOffsetStore { get; init; }
+    public AutoOffsetReset? AutoOffsetReset { get; init; }
 }

@@ -2,7 +2,7 @@
 
 namespace EventAggregator.Shared.MessageBrokers.Abstractions;
 
-public interface IProducer<TMessage> : IDisposable where TMessage : IMessage
+public interface IProducer<TMessage> where TMessage : IMessage
 {
-    Task SendMessage(Guid requestId, TMessage message, TopicType topic, CancellationToken cancellationToken);
+    Task SendMessage(string messageKey, TMessage message, TopicType topic, CancellationToken cancellationToken);
 }

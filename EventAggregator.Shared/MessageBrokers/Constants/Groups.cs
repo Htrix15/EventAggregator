@@ -8,7 +8,7 @@ public class Groups
         [GroupType.Orchestrator] = "orchestrator"
     };
 
-    public static string GetTopic(GroupType groupType)
+    public static string GetGroup(GroupType groupType)
     {
         if (_topics.TryGetValue(groupType, out var groupTypeStr))
         {

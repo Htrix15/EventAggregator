@@ -5,7 +5,7 @@ namespace EventAggregator.Shared.MessageBrokers.Configuration;
 
 public record MessageBrokerConfiguration
 {
-    public ExternalServiceType? Client { get; init; }
-    public GroupType? Group { get; init; }
+    public ExternalServiceType Client { get; set; }
+    public GroupType Group { get; set; }
     public string? BootstrapServers { get; init; }
 }
