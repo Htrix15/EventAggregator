@@ -1,10 +1,10 @@
 ﻿using EventAggregator.Shared.Extensions;
 using System.Threading.Channels;
 
-namespace EventAggregator.Shared.Tests;
+namespace EventAggregator.Shared.Tests.ExtensionsTests;
 
 [TestFixture]
-public class MergeAsyncExtensionTests
+internal class MergeAsyncExtensionTests
 {
     [Test]
     public async Task MergeAsync_EmptyChannels_ReturnsEmptyStream()
