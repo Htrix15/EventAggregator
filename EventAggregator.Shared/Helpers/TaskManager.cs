@@ -38,9 +38,44 @@ public class TaskManager(int maxConcurrency = 10) : IDisposable
         }
     }
 
+
+    private static async Task ActiveTasksFinallizer(ConcurrentDictionary<Guid, TaskWrap> activeTasks)
+    {
+        if (!activeTasks.IsEmpty)
+        {
+            foreach (var activeTask in activeTasks)
+            {
+                if (!activeTask.Value.CancellationTokenSource.IsCancellationRequested)
+                {
+                    activeTask.Value.CancellationTokenSource.Cancel();
+                }
+            }
+
+            var tasksToWait = activeTasks.Values.Where(t => !t.Task.IsCompleted).Select(t => t.Task).ToArray();
+
+            try
+            {
+                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
+                await Task.WhenAll(tasksToWait).WaitAsync(cts.Token);
+            }
+            catch (OperationCanceledException)
+            {
+                //TODO Log
+            }
+
+            foreach (var activeTask in activeTasks)
+            {
+                await activeTask.Value.DisposeAsync();
+            }
+
+            activeTasks.Clear();
+        }
+    }
+
     public async Task Run<TStartActionMessage, TBreakActionMessage>(ChannelReader<TStartActionMessage> actionsChannelReader,
         ChannelReader<TBreakActionMessage> breakersChannelReader,
         Func<TStartActionMessage, CancellationToken, Task> action,
+        Func<TBreakActionMessage, CancellationToken, Task>? breakAction,
         CancellationToken cancellationToken)
             where TStartActionMessage : IMessage
             where TBreakActionMessage : IMessage
@@ -125,6 +160,20 @@ public class TaskManager(int maxConcurrency = 10) : IDisposable
                         {
                             if (activeTasks.TryRemove(breakMessage.RequestId, out var activeTask))
                             {
+                                if (breakAction != null)
+                                {
+
+                                    var _ = Task.Run(async () =>
+                                    {
+                                        try
+                                        {
+                                            await breakAction(breakMessage, cancellationToken);
+                                        }
+                                        catch  {
+                                        //TODO Log
+                                        }
+                                    }, CancellationToken.None);
+                                }
                                 await activeTask.DisposeAsync();
                             }
                             break;
@@ -134,35 +183,7 @@ public class TaskManager(int maxConcurrency = 10) : IDisposable
         }
         finally
         {
-            if (!activeTasks.IsEmpty)
-            {
-                foreach (var activeTask in activeTasks)
-                {
-                    if (!activeTask.Value.CancellationTokenSource.IsCancellationRequested)
-                    {
-                        activeTask.Value.CancellationTokenSource.Cancel();
-                    }
-                }
-
-                var tasksToWait = activeTasks.Values.Where(t => !t.Task.IsCompleted).Select(t => t.Task).ToArray();
-
-                try
-                {
-                    using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
-                    await Task.WhenAll(tasksToWait).WaitAsync(cts.Token);
-                }
-                catch (OperationCanceledException)
-                {
-                    //TODO Log
-                }
-
-                foreach (var activeTask in activeTasks)
-                {
-                    await activeTask.Value.DisposeAsync();
-                }
-
-                activeTasks.Clear();
-            }
+           await ActiveTasksFinallizer(activeTasks);
         }
     }
 
