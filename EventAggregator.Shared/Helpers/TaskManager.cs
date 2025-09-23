@@ -38,7 +38,6 @@ public class TaskManager(int maxConcurrency = 10) : IDisposable
         }
     }
 
-
     private static async Task ActiveTasksFinallizer(ConcurrentDictionary<Guid, TaskWrap> activeTasks)
     {
         if (!activeTasks.IsEmpty)

@@ -4,8 +4,5 @@ using EventAggregator.Shared.ShowEntities.ValueObjects;
 
 namespace EventAggregator.Shared.ShowEntities.Messages;
 
-public record StartShowAggregationMessage : MessageBase
-{
-    public required List<DateRange> SearchDateRanges { get; init; }
-    public required List<ShowType> ShowTypes { get; init; }
-}
+public record StartShowAggregationMessage(Guid RequestId, DateTime RequestDateTime, List<DateRange> SearchDateRanges, List<ShowType> ShowTypes) 
+    : MessageBase(RequestId, RequestDateTime);

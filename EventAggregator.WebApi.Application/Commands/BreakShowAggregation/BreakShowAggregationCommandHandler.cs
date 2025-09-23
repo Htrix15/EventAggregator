@@ -27,11 +27,7 @@ public class BreakShowAggregationCommandHandler(IExternalServiceHealthChecker ex
             };
         }
 
-        var message = new BreakShowAggregationMessage()
-        {
-            RequestId = command.RequestId,
-            RequestDateTime = DateTime.UtcNow,
-        };
+        var message = new BreakShowAggregationMessage(command.RequestId, DateTime.UtcNow);
 
         try
         {

@@ -28,13 +28,7 @@ public class StartShowAggregationCommandHandler(IExternalServiceHealthChecker ex
             };
         }
 
-        var message = new StartShowAggregationMessage()
-        {
-            RequestId = requestId,
-            RequestDateTime = DateTime.UtcNow,
-            SearchDateRanges = command.SearchDateRanges,
-            ShowTypes = command.ShowTypes
-        };
+        var message = new StartShowAggregationMessage(requestId, DateTime.UtcNow, command.SearchDateRanges, command.ShowTypes);
 
         try
         {

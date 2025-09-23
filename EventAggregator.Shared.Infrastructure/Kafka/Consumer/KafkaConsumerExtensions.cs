@@ -9,7 +9,6 @@ namespace EventAggregator.Shared.Infrastructure.Kafka.Consumer;
 
 public static class KafkaConsumerExtensions
 {
-
     public static IServiceCollection AddKafkaConsumer<TMessage>(this IServiceCollection services,
         IConfigurationSection messageBrokerConfigurationSection,
         IConfigurationSection messageBrokerConsumerToChannelConfigurationSection,

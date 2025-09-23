@@ -2,6 +2,4 @@
 
 namespace EventAggregator.Shared.ShowEntities.Messages;
 
-public record BreakShowAggregationMessage : MessageBase
-{
-}
+public record BreakShowAggregationMessage(Guid RequestId, DateTime RequestDateTime) : MessageBase(RequestId, RequestDateTime);
