@@ -7,7 +7,9 @@ public class Topics
     private readonly static Dictionary<TopicType, string> _topics = new()
     {
         [TopicType.StartShowAggregation] = "start-show-aggregation",
-        [TopicType.BreakShowAggregation] = "break-show-aggregation"
+        [TopicType.BreakShowAggregation] = "break-show-aggregation",
+        [TopicType.SearchShowStarted] = "search-show-started",
+        [TopicType.ShowListResult] = "show-list-result"
     };
 
     public static string GetTopic(TopicType topic)

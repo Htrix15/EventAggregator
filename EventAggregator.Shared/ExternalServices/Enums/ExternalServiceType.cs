@@ -4,4 +4,5 @@ public enum ExternalServiceType
 {
     WebApi,
     Orchestrator,
+    KassirApi,
 }

@@ -4,4 +4,6 @@ public enum TopicType
 {
     StartShowAggregation,
     BreakShowAggregation,
+    SearchShowStarted,
+    ShowListResult
 }
