@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36408.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventAggregator.Kassir.Api", "EventAggregator.Kassir.Api.csproj", "{9E31A5FC-2B9D-4860-AC77-72E737539822}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventAggregator.Shared", "..\EventAggregator.Shared\EventAggregator.Shared.csproj", "{0AF0EB85-AD9E-5487-8869-1E39E9E2104F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventAggregator.Shared.Infrastructure", "..\EventAggregator.Shared.Infrastructure\EventAggregator.Shared.Infrastructure.csproj", "{10199AF4-E510-83FB-6C32-0A9926FC9EC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventAggregator.Kassir.Application", "..\EventAggregator.Kassir.Application\EventAggregator.Kassir.Application.csproj", "{7EED4E6E-746A-44CB-B9B9-DF0ACD88CC6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventAggregator.Kassir.Domain", "..\EventAggregator.Kassir.Domain\EventAggregator.Kassir.Domain.csproj", "{212B2566-2E69-4672-8D21-9790C21C9507}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventAggregator.Kassir.Infrastructure", "..\EventAggregator.Kassir.Infrastructure\EventAggregator.Kassir.Infrastructure.csproj", "{EC9BDE0A-E193-4BC2-AF57-C56DA60E6C91}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E31A5FC-2B9D-4860-AC77-72E737539822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E31A5FC-2B9D-4860-AC77-72E737539822}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E31A5FC-2B9D-4860-AC77-72E737539822}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E31A5FC-2B9D-4860-AC77-72E737539822}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AF0EB85-AD9E-5487-8869-1E39E9E2104F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AF0EB85-AD9E-5487-8869-1E39E9E2104F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AF0EB85-AD9E-5487-8869-1E39E9E2104F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AF0EB85-AD9E-5487-8869-1E39E9E2104F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10199AF4-E510-83FB-6C32-0A9926FC9EC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10199AF4-E510-83FB-6C32-0A9926FC9EC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10199AF4-E510-83FB-6C32-0A9926FC9EC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10199AF4-E510-83FB-6C32-0A9926FC9EC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EED4E6E-746A-44CB-B9B9-DF0ACD88CC6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EED4E6E-746A-44CB-B9B9-DF0ACD88CC6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EED4E6E-746A-44CB-B9B9-DF0ACD88CC6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EED4E6E-746A-44CB-B9B9-DF0ACD88CC6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{212B2566-2E69-4672-8D21-9790C21C9507}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{212B2566-2E69-4672-8D21-9790C21C9507}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{212B2566-2E69-4672-8D21-9790C21C9507}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{212B2566-2E69-4672-8D21-9790C21C9507}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC9BDE0A-E193-4BC2-AF57-C56DA60E6C91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC9BDE0A-E193-4BC2-AF57-C56DA60E6C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC9BDE0A-E193-4BC2-AF57-C56DA60E6C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC9BDE0A-E193-4BC2-AF57-C56DA60E6C91}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8A990914-E61E-45B2-9BFC-085C591DB29D}
+	EndGlobalSection
+EndGlobal

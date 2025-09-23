@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>5871e747-b714-4907-a051-a1d91798c0e1</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>.</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EventAggregator.Kassir.Application\EventAggregator.Kassir.Application.csproj" />
+    <ProjectReference Include="..\EventAggregator.Kassir.Infrastructure\EventAggregator.Kassir.Infrastructure.csproj" />
+    <ProjectReference Include="..\EventAggregator.Shared.Infrastructure\EventAggregator.Shared.Infrastructure.csproj" />
+    <ProjectReference Include="..\EventAggregator.Shared\EventAggregator.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
